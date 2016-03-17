@@ -1,7 +1,7 @@
 /* global process */
 /* global __dirname */
 var express = require('express');
-var admin = require('sriracha-admin');
+//var admin = require('sriracha-admin');
 var app = express();
 var port    =   process.env.PORT || 3000;
 
@@ -21,7 +21,7 @@ router.all('/*', function(req, res) {
 
 require('./core').init(function(err, coreRouter) {
   app.use('/api', coreRouter);
-  app.use('/admin', admin());
+  //app.use('/admin', admin());
   app.use('/', router);
   app.listen(port, function () {
     console.log('App started on port '+port);
