@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h3>Create collection</h3>
+</div>
+<div class="row">
+  <div class="col s12">
+    <input type="text" placeholder="Collection name" [(ngModel)]=name>
+  </div>
+  <div class="col m3">
+    <ul id="draggable" class="collection">
+      <li class="collection-item draggable" data-type="String" data-input="text"><i class="material-icons">title</i><span>Text input</span></li>
+      <li class="collection-item draggable" data-type="String" data-input="textarea"><i class="material-icons">description</i><span>Text area</span></li>
+      <li class="collection-item draggable" data-type="Date" data-input="date"><i class="material-icons">date_range</i><span>Date picker</span></li>
+      <li class="collection-item draggable" data-type="Buffer" data-input="image"><i class="material-icons">insert_photo</i><span>Image</span></li>
+    </ul>
+  </div>
+  <div class="col m9">
+    <ul id="sortable" class="collection">
+      <li class="collection-item row collection-field" data-type="String">
+        <div class="col s1">
+          <i class="material-icons">title</i>
+        </div>
+        <div class="col s10">
+          <input type="text" value="Name" placeholder="Field name">
+        </div>
+        <div class="col s1">
+        </div>
+      </li>
+    </ul>
+    <button type="button" class="btn waves-effect waves-light" (click)="saveCollection()">Save collection</button>
+  </div>
+</div>

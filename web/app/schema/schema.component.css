@@ -1,0 +1,31 @@
+.collection-item.row {
+  margin-bottom: 0;
+}
+.collection-item input {
+  height: 30px;
+  margin-bottom: 0;
+}
+.collection-item .material-icons {
+  vertical-align: bottom;
+}
+.collection-item span {
+  margin-left: 10px;
+}
+.page-header {
+  padding: 0 20px;
+}
+.collection .collection-item {
+  width: 100% !important;
+}
+.collection-item {
+  height: 52px !important;
+}
+.collection-item.draggable {
+  cursor: pointer;
+}
+.collection-item.draggable:hover {
+  background-color: #ddd;
+}
+.material-icons {
+  color: #333;
+}
