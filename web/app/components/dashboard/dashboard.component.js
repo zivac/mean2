@@ -10,28 +10,27 @@ System.register(['angular2/core'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var CollectionService;
+    var DashboardComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            CollectionService = (function () {
-                function CollectionService() {
-                    // http.get('api/collections').subscribe(res => {
-                    //   this.collections = res.json();
-                    // });
+            DashboardComponent = (function () {
+                function DashboardComponent() {
                 }
-                CollectionService = __decorate([
-                    core_1.Injectable(), 
+                DashboardComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/components/dashboard/dashboard.component.html',
+                        styleUrls: ['app/components/dashboard/dashboard.component.css'],
+                    }), 
                     __metadata('design:paramtypes', [])
-                ], CollectionService);
-                return CollectionService;
+                ], DashboardComponent);
+                return DashboardComponent;
             })();
-            exports_1("CollectionService", CollectionService);
+            exports_1("DashboardComponent", DashboardComponent);
         }
     }
 });
-// api/people.json
-//# sourceMappingURL=collection.service.js.map
+//# sourceMappingURL=dashboard.component.js.map

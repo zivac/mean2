@@ -1,0 +1,14 @@
+<div [ngSwitch]="type" class="row">
+  <div *ngSwitchWhen="'textarea'" class="s12">
+    <label>{{name}}</label>
+    <textarea class="materialize-textarea" [(ngModel)]="value" (change)=emitValueChange()></textarea>
+  </div>
+  <div *ngSwitchWhen="'date'" class="s12">
+    <label>{{name}}</label>
+    <input type="date" class="datepicker" [(ngModel)]="value" (change)=emitValueChange()>
+  </div>
+  <div *ngSwitchDefault class="s12">
+    <label>{{name}}</label>
+    <input type="{{type}}" [(ngModel)]="value" (change)=emitValueChange()>
+  </div>
+</div>

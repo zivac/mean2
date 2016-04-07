@@ -11,8 +11,8 @@ var router = express.Router();
 
 router.use(function(req, res, next) {
 
-    // continue doing what we were doing and go to the route
-    next();
+  // continue doing what we were doing and go to the route
+  next();
 });
 
 router.all('/*', function(req, res) {

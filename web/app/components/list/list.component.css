@@ -23,3 +23,20 @@
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
 }
+.form {
+  padding: 15px;
+  margin-bottom: 0;
+}
+.page-header .btn {
+  float: right;
+  margin-top: 30px;
+}
+.page-header h3 {
+  float: left;
+}
+.collapsible {
+  clear: both;
+}
+ul.tabs {
+  overflow-x: hidden;
+}

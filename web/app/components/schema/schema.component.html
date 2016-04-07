@@ -1,9 +1,9 @@
-<div class="page-header">
+<div class="page-header" *ngIf="!data">
   <h3>Create collection</h3>
 </div>
 <div class="row">
   <div class="col s12">
-    <input type="text" placeholder="Collection name" [(ngModel)]=name>
+    <input type="text" placeholder="Collection name" [(ngModel)]=name *ngIf="!data">
   </div>
   <div class="col m3">
     <ul id="draggable" class="collection">
@@ -13,19 +13,35 @@
       <li class="collection-item draggable" data-type="Buffer" data-input="image"><i class="material-icons">insert_photo</i><span>Image</span></li>
     </ul>
   </div>
-  <div class="col m9">
+  <div class="col m9" *ngIf="!data">
     <ul id="sortable" class="collection">
-      <li class="collection-item row collection-field" data-type="String">
+      <li class="collection-item row collection-field" data-type="String" data-input="text">
         <div class="col s1">
           <i class="material-icons">title</i>
         </div>
         <div class="col s10">
-          <input type="text" value="Name" placeholder="Field name">
+          <input type="text" [(ngModel)]=mainField value="Name" placeholder="Field name">
         </div>
         <div class="col s1">
         </div>
       </li>
     </ul>
     <button type="button" class="btn waves-effect waves-light" (click)="saveCollection()">Save collection</button>
+  </div>
+  <div class="col m9" *ngIf="data">
+    <ul id="sortable_1" class="collection">
+      <li class="collection-item row collection-field" [attr.data-type]="data.blueprint[field]" [attr.data-input]="data.form[field]" *ngFor="#field of getKeys()">
+        <div class="col s1">
+          <i class="material-icons">title</i>
+        </div>
+        <div class="col s10">
+          <input type="text" [value]="field" placeholder="Field name">
+        </div>
+        <div class="col s1">
+          <i class="material-icons right delete" style="cursor:pointer">delete_forever</i>
+        </div>
+      </li>
+    </ul>
+    <button type="button" class="btn waves-effect waves-light" (click)="updateCollection()">Update collection</button>
   </div>
 </div>

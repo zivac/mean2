@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h3>{{collectionName}}</h3>
+  <a class="waves-effect waves-light btn" (click)="addNewItem()">Add new</a>
+</div>
+<ul class="tabs">
+  <li class="tab"><a class="active" href="#list">List</a></li>
+  <li class="tab"><a href="#schema">Schema</a></li>
+</ul>
+<div id="list">
+  <ul class="collapsible" data-collapsible="expandable">
+    <li *ngFor="#item of collectionItems" id="item_{{item._id}}">
+      <div class="collapsible-header waves-effect waves-light"><input type="checkbox" id="{{item._id}}"/><label [attr.for]="item._id"></label>{{item[collectionData.mainField]}}</div>
+      <div class="collapsible-body">
+        <div class="row">
+          <form class="col s12 form">
+            <div *ngFor="#key of getKeys()">
+              <my-input [name]="key" [type]="collectionData.form[key]" [value]="item[key]" (valueChange)="item[key]=$event"></my-input>
+            </div>
+            <div class="action">
+              <a class="waves-effect waves-light btn" (click)=saveItem(item)>Save</a>
+              <a class="waves-effect waves-light btn red" (click)=deleteItem(item)>Delete</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+<div id="schema">
+  <my-schema [data]="collectionData"></my-schema>
+</div>

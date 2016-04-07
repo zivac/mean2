@@ -3,7 +3,7 @@
     <ul id="slide-out" class="side-nav fixed">
       <li class="logo-wrapper valign-wrapper"><a [routerLink]="['Dashboard']" class="logo valign"><img src="img/generic-logo-hi.png" alt="" /></a></li>
       <li class="waves-effect"><a [routerLink]="['Dashboard']"><i class="small material-icons">dashboard</i> Dashboard</a></li>
-      <li class="waves-effect"><a [routerLink]="['List']"><i class="small material-icons">list</i> List</a></li>
+      <li class="waves-effect" *ngFor="#collection of collections"><a [routerLink]="['List', {name: collection.name}]"><i class="small material-icons">list</i> {{collection.name}}</a></li>
       <li class="waves-effect"><a [routerLink]="['Schema']"><i class="small material-icons">add_box</i> New collection</a></li>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
