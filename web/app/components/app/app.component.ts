@@ -28,8 +28,13 @@ export class AppComponent {
   constructor() {
     ApiService.getCollections().then(response => this.collections = response);
     ApiService.collectionEmitter.subscribe(data => {
-      console.log(data);
-      this.collections.push(data)
+      var collection = this.collections.find(collection => collection['name'] == data.name);
+      if(collection) {
+        collection['blueprint'] = data.blueprint;
+        collection['form'] = data.form;
+        collection['mainField'] = data.mainField;
+      }
+      else this.collections.push(data)
     });
   }
 

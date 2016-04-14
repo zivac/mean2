@@ -49,25 +49,33 @@ System.register(['angular2/core', 'angular2/router', 'angular2/common', '../../s
                     if (item === void 0) { item = {}; }
                     if (this.collectionItems.length == 0 || this.collectionItems[0]['_id']) {
                         this.collectionItems.unshift(item);
+                        //allow list item to be added to the dom before triggering a click to open it
                         setTimeout(function () {
                             jQuery('#item_').find('.collapsible-header').trigger('click');
                         }, 0);
                     }
                 };
                 ListComponent.prototype.saveItem = function (item) {
-                    if (item._id)
-                        api_service_1.ApiService.editItem(this.collectionName, item._id, item).then(function (data) {
-                            jQuery('#item_' + item._id).find('.collapsible-header').trigger('click');
-                        });
-                    else
-                        api_service_1.ApiService.createItem(this.collectionName, item).then(function (data) {
-                            jQuery('#item_').find('.collapsible-header').trigger('click');
-                            item._id = data['_id'];
-                        });
+                    var _this = this;
+                    //let the valueChange event trigger first
+                    setTimeout(function () {
+                        if (item._id)
+                            api_service_1.ApiService.editItem(_this.collectionName, item._id, item).then(function (data) {
+                                jQuery('#item_' + item._id).find('.collapsible-header').trigger('click');
+                            });
+                        else
+                            api_service_1.ApiService.createItem(_this.collectionName, item).then(function (data) {
+                                jQuery('#item_').find('.collapsible-header').trigger('click');
+                                item._id = data['_id'];
+                            });
+                    }, 0);
                 };
                 ListComponent.prototype.deleteItem = function (item) {
                     var _this = this;
-                    api_service_1.ApiService.deleteItem(this.collectionName, item._id).then(function (data) { return _this.collectionItems = _this.collectionItems.filter(function (i) { return i['_id'] != item._id; }); });
+                    if (item._id)
+                        api_service_1.ApiService.deleteItem(this.collectionName, item._id).then(function (data) { return _this.collectionItems = _this.collectionItems.filter(function (i) { return i['_id'] != item._id; }); });
+                    else
+                        this.collectionItems = this.collectionItems.filter(function (i) { return i['_id']; });
                 };
                 ListComponent.prototype.getKeys = function () {
                     return Object.keys(this.collectionData['form']);

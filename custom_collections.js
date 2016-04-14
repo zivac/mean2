@@ -89,11 +89,21 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var item = req.body;
   console.log(item);
-  collections[item.name] = mongoose.model(item.name, item.blueprint);
-  Collection.create(req.body, function(err, data) {
-    if(err) return next(err);
-    res.send(data);
-  })
+  if(!item.name) return res.send(400, 'No collection name provided');
+  if(collections[item.name]) {
+    delete mongoose.connection.models[item.name];
+    collections[item.name] = mongoose.model(item.name, item.blueprint);
+    Collection.update({name:item.name}, item, function(err,data) {
+      if(err) return next(err);
+      res.send(item);
+    })
+  } else {
+    collections[item.name] = mongoose.model(item.name, item.blueprint);
+    Collection.create(req.body, function(err, data) {
+      if(err) return next(err);
+      res.send(data);
+    })
+  }
 })
 
 module.exports = router;

@@ -35,6 +35,7 @@ export class ListComponent {
   addNewItem(item:Object={}) {
     if(this.collectionItems.length == 0 || this.collectionItems[0]['_id']) {
       this.collectionItems.unshift(item);
+      //allow list item to be added to the dom before triggering a click to open it
       setTimeout(function() {
         jQuery('#item_').find('.collapsible-header').trigger('click')
       }, 0);
@@ -42,17 +43,21 @@ export class ListComponent {
   }
 
   saveItem(item) {
-    if(item._id) ApiService.editItem(this.collectionName, item._id, item).then(function(data) {
-      jQuery('#item_'+item._id).find('.collapsible-header').trigger('click')
-    });
-    else ApiService.createItem(this.collectionName, item).then(function(data) {
-      jQuery('#item_').find('.collapsible-header').trigger('click')
-      item._id = data['_id'];
-    });
+    //let the valueChange event trigger first
+    setTimeout(() => {
+      if(item._id) ApiService.editItem(this.collectionName, item._id, item).then(function(data) {
+        jQuery('#item_'+item._id).find('.collapsible-header').trigger('click')
+      });
+      else ApiService.createItem(this.collectionName, item).then(function(data) {
+        jQuery('#item_').find('.collapsible-header').trigger('click')
+        item._id = data['_id'];
+      });
+    }, 0);
   }
 
   deleteItem(item) {
-    ApiService.deleteItem(this.collectionName, item._id).then(data => this.collectionItems = this.collectionItems.filter(i => i['_id'] != item._id));
+    if(item._id) ApiService.deleteItem(this.collectionName, item._id).then(data => this.collectionItems = this.collectionItems.filter(i => i['_id'] != item._id));
+    else this.collectionItems = this.collectionItems.filter(i => i['_id']);
   }
 
   getKeys() {

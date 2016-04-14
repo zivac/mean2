@@ -37,8 +37,14 @@ System.register(['angular2/core', 'angular2/router', '../list/list.component', '
                     var _this = this;
                     api_service_1.ApiService.getCollections().then(function (response) { return _this.collections = response; });
                     api_service_1.ApiService.collectionEmitter.subscribe(function (data) {
-                        console.log(data);
-                        _this.collections.push(data);
+                        var collection = _this.collections.find(function (collection) { return collection['name'] == data.name; });
+                        if (collection) {
+                            collection['blueprint'] = data.blueprint;
+                            collection['form'] = data.form;
+                            collection['mainField'] = data.mainField;
+                        }
+                        else
+                            _this.collections.push(data);
                     });
                 }
                 AppComponent.prototype.ngOnInit = function () {

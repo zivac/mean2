@@ -1,1 +1,31 @@
-dashboard
+<div class="row">
+  <div class="vehicles col s6">
+    <div *ngFor="#vehicle of vehicles" class="card">
+      <div class="card-content">
+        <input type="text" [(ngModel)]="vehicle.name" placeholder="Name">
+        <input type="text" [(ngModel)]="vehicle.wheels" placeholder="Wheels">
+        <input type="text" [(ngModel)]="vehicle.speed" placeholder="Speed">
+        <select (change)="changed()" [attr.data-vehicle]="vehicle.name">
+          <option value="" disabled selected>Choose your option</option>
+          <option *ngFor="#driver of drivers" [value]="driver.name" (click)="vehicle.setOwner(driver)">{{driver.name}}</option>
+        </select>
+      </div>
+      <div class="card-action">
+        <a (click)="saveVehicle(vehicle)">Save</a>
+      </div>
+    </div>
+    <button (click)="createVehicle()" class="btn">Add vehicle</button>
+  </div>
+  <div class="drivers col s6">
+    <div *ngFor="#driver of drivers" class="card">
+      <div class="card-content">
+        <input type="text" [(ngModel)]="driver.name" placeholder="Name" (change)="changed()">
+        <input type="text" [(ngModel)]="driver.age" placeholder="Age">
+      </div>
+      <div class="card-action">
+        <a (click)="saveDriver(driver)">Save</a>
+      </div>
+    </div>
+    <button (click)="createDriver()" class="btn">Add driver</button>
+  </div>
+</div>

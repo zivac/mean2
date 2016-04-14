@@ -59,7 +59,7 @@ System.register(['angular2/core', '../../services/api/api.service', 'angular2/ro
                             helper: "clone",
                             revert: "invalid"
                         });
-                        jQuery("ul, li").disableSelection();
+                        //jQuery( "ul, li" ).disableSelection();
                     }, 0);
                 };
                 SchemaComponent.prototype.getKeys = function () {

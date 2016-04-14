@@ -64,7 +64,7 @@ export class SchemaComponent {
         helper: "clone",
         revert: "invalid"
       });
-      jQuery( "ul, li" ).disableSelection();
+      //jQuery( "ul, li" ).disableSelection();
     }, 0);
   }
 
